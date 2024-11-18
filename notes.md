@@ -73,3 +73,42 @@ NOTE: RUN THIS BEFORE RAILS S
 # using render partial
   - example: render partial "shared/navbar"
   - the file name must be shared>_navbar.html.erb since it is a partial, meaning just part of a page
+
+# dropping table
+  - rails c
+  - ActiveRecord::Migration.drop_table(:table_name)
+
+# migration
+  - prevents data loss especially in prod
+  - if we will add column, it will just migrate it to the current database and all data will have empty value on the added column
+
+# has_secure_password
+  - enable bcrypt in gemfile
+  - bundle
+
+# validation, add in ruby and in database migration for security
+  - after rails db:migrate:redo to add the rule
+
+# deleting resource
+  - rails c
+  - User.last.destroy etc
+
+# rails g model TwitterAccount user:belongs_to name username image token secret
+- in the user.rb
+  - has_many :twitter_accounts
+
+# adding column
+  - ActiveRecord::Migration.add_column :users, :name, :string, null: false, default: 'Unknown'
+
+# deleting column
+  - ActiveRecord::Migration.remove_column :users, :name
+
+# updating user
+  -  Find the user by their email (or any other attribute)
+  user = User.find_by(email: 'user@example.com')
+
+  -  Change the value of the role column
+user.update(role: 'admin')
+
+  - You can check if the update was successful:
+  - user.reload # Reload to get the updated values from the database

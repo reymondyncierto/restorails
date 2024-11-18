@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+    <%= link_to "<", calendar_day_path(date: @date - 1.day), class: "btn btn-primary" %>
+    <%= link_to "Today", calendar_day_path, class: "btn btn-secondary" %>
+    <%= link_to ">", calendar_day_path(date: @date + 1.day), class: "btn btn-primary" %>
+  </div>
+  <%= render 'shared/tab' %>
+</div>
+
+<h2 class="text-center my-4"><%= @date.strftime('%A, %B %d, %Y') %></h2>
+
+<div class="container">
+  <div class="row">
+    <!-- Add any additional details or events for the day here -->
+    <div class="col">
+      <p>Event 1: <%= @event1 || "No events for today" %></p>
+      <p>Event 2: <%= @event2 || "No events for today" %></p>
+    </div>
+  </div>
+</div>

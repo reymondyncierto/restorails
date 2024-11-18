@@ -11,8 +11,26 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :reservations, only: [:create]
+    resources :time_slots, only: [:new, :create, :edit, :update, :destroy]
 
   root "main#index"
 
-  get "about", to: "about#index", as: :about # creates about_path named route
+  get "about", to: "about#index" # automatically creates about_path named route
+  get "sign-up", to: "registrations#index"
+  get "sign-in", to: "sessions#index"
+  get "password", to: "passwords#edit"
+  get "calendar/month", to: "calendar#month"
+  get "calendar/week", to: "calendar#week"
+  get "calendar/day", to: "calendar#day"
+  get '/calendar/time_slots', to: 'calendar#time_slots'
+
+  post "sign-up", to: "registrations#create"
+  post "sign-in", to: "sessions#login"
+  post "time_slot", to: "time_slots#create"
+
+  patch "password", to: "passwords#update"
+
+  delete "logout", to: "sessions#destroy"
+
 end

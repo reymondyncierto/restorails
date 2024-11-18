@@ -5,8 +5,10 @@
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
   },
   "dependencies": {
+    "@fullcalendar/interaction": "^6.1.15",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.12",
+    "jquery": "^3.7.1",
     "yarn": "^1.22.22"
   },
   "devDependencies": {

@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+<%= link_to "<", calendar_week_path(date: @date - 1.week), class: "btn btn-primary" %>
+<%= link_to "Today", calendar_week_path, class: "btn btn-secondary" %>
+<%= link_to ">", calendar_week_path(date: @date + 1.week), class: "btn btn-primary" %>
+  </div>
+  <%= render 'shared/tab' %>
+</div>
+
+<h2 class="text-center my-4">
+  <%= @date.strftime('%B %d, %Y') %>
+</h2>
+
+<div class="container">
+  <div class="row text-center font-weight-bold">
+    <% Date::ABBR_DAYNAMES.each do |weekday| %>
+      <div class="col">
+        <%= weekday %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Loop over the days of the current week -->
+  <div class="row">
+    <% (start_of_week(@date)..end_of_week(@date)).each do |day| %>
+      <div class="col border <%= today_class(day) %>" style="height: 125px; display: flex; align-items: center; justify-content: center;">
+        <%= day.strftime('%d') %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,6 @@
-<p>Make a reservation</p>
+format.turbo_stream { render turbo_stream: turbo_stream.replace('reservation_form', partial: 'reservations/form', locals: { reservation: @reservation }) }
+
+<!-- app/views/reservations/_form.html.erb -->
 <%= form_with model: @reservation, local: true, id: "reservation-form" do |form| %>
   <!-- Display user information but do not send it with the form -->
   <div class="form-group">
@@ -38,33 +40,3 @@
 
   <%= form.submit "Make Reservation", class: "btn btn-primary" %>
 <% end %>
-
-<!-- Display validation errors -->
-<% if @reservation.errors.any? %>
-  <div class="alert alert-danger mt-3">
-    <ul>
-      <% @reservation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('reservation-form'); // Make sure the form ID matches
-  form.addEventListener('submit', function (event) {
-    // Get the values of the date and time fields
-    const date = form.querySelector('input[name="reservation[date]"]').value;
-    const time = form.querySelector('input[name="reservation[time]"]').value;
-
-    if (date && time) {
-      // Combine the date and time into a single datetime string
-      const combinedDateTime = `${date}T${time}`; // Using "T" to form a valid datetime format (e.g., 2024-11-18T10:00)
-
-      // Set the hidden field with the combined value
-      form.querySelector('input[name="reservation[combined_datetime]"]').value = combinedDateTime;
-    }
-  });
-});
-</script>
